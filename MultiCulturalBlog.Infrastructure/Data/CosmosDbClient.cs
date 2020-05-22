@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using AsyncLazy;
@@ -86,6 +87,26 @@ namespace MultiCulturalBlog.Infrastructure.Data
         {
             return _documentClient.CreateDocumentQuery<T>(
                 (await _collection.GetValueAsync()).SelfLink).AsEnumerable();
+        }
+
+        public async Task<bool> RemoveAsync(string id, RequestOptions requestOptions = null)
+        {
+            bool isSuccess = false;
+
+            var doc = await GetDocumentByIdAsync(id);
+           
+            if (doc != null)
+            {
+                var result = await _documentClient.DeleteDocumentAsync(doc.SelfLink, requestOptions);
+
+                isSuccess = result.StatusCode == HttpStatusCode.NoContent;
+            }
+
+            return isSuccess;
+        }
+        private async Task<Document> GetDocumentByIdAsync(object id)
+        {
+            return _documentClient.CreateDocumentQuery<Document>((await _collection.GetValueAsync()).SelfLink).AsEnumerable().Where(d => d.Id == id.ToString()).AsEnumerable().FirstOrDefault();
         }
 
     }

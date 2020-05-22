@@ -22,5 +22,6 @@ namespace MultiCulturalBlog.Infrastructure.Data
             CancellationToken cancellationToken = default(CancellationToken));
         Task<IEnumerable<T>> ReadAllDocumentAsync<T>(RequestOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> RemoveAsync(string id, RequestOptions requestOptions = null);
     }
 }

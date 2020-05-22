@@ -104,9 +104,8 @@ namespace MultiCulturalBlog
                     }
                 }
             }
+            Blog.CreationDate = DateTime.Now;
             var toDo = await _context.AddAsync(Blog);
-
-
             return RedirectToPage("./Index");
         }
     }

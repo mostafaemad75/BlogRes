@@ -12,54 +12,59 @@
 <!-- Blog content -->
 <div class="col-md-9 blogpost">
     <article class="post">
-        <div class="post-thumb">
-            <img src="@Model.Blog.PhotoUrl" width="690" height="310" class="img-responsive" alt="img">
-        </div>
-        <h3><a href="#">@Model.Blog.Title</a></h3>
-        <div class="blog-meta"><span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @Model.Blog.CreationDate.ToString("s")</span> </div>
-        <div class="space20"></div>
-        <p>
-            @Model.Blog.Body
-        </p>
-        <div class="space20"></div>
-        @if (Model.Blog.VideoUrls.Length > 0)
-        {
-            <h3>Videos</h3>
-            <div class="space30"></div>
-            @foreach (var video in Model.Blog.VideoUrls)
+        
+        <form method="post">
+            <div class="post-thumb">
+                <img src="@Model.Blog.PhotoUrl" width="690" height="310" class="img-responsive" alt="img">
+            </div>
+            <h3><a href="#">@Model.Blog.Title</a></h3>
+            <div class="blog-meta"><span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @Model.Blog.CreationDate.ToString("s")</span> <button class="btn btn-danger" data- id="btnDelete"><span><i class="fa fa-times"></i> Delete</span></button> </div>
+            <div class="space20"></div>
+            <p>
+                @Model.Blog.Body
+            </p>
+            <div class="space20"></div>
+            @if (Model.Blog.VideoUrls.Length > 0)
             {
-                <div class="video">
-                    <iframe src="@video" class="full-video" height="300"></iframe>
-                </div>
-                <div class="space20"></div>
-            }
-        }
-
-        @if (Model.Blog.Attachments.Length > 0)
-        {
-            <h3>Attachments</h3>
-            <div class="space30"></div>
-
-            <div class="row">
-                @foreach (var attachment in Model.Blog.Attachments)
+                <h3>Videos</h3>
+                <div class="space30"></div>
+                @foreach (var video in Model.Blog.VideoUrls)
                 {
-                   
+                    <div class="video">
+                        <iframe src="@video" class="full-video" height="300"></iframe>
+                    </div>
+                    <div class="space20"></div>
+                }
+            }
+
+            @if (Model.Blog.Attachments.Length > 0)
+            {
+                <h3>Attachments</h3>
+                <div class="space30"></div>
+
+                <div class="row">
+                    @foreach (var attachment in Model.Blog.Attachments)
+                    {
+
                         <div class="col-md-4 service-content">
                             <a href="@attachment.FileUrl" target="_blank">
                                 <i class="icon-folder-download2"></i>
                                 <h4>@attachment.OriginalFileName</h4>
                             </a>
                         </div>
-                    
-                }
-            </div>
 
-            <div class="space20"></div>
-        }
+                    }
+                </div>
 
-        <div class="clear"></div>
-        <div class="space30"></div>
+                <div class="space20"></div>
+            }
+
+            <div class="clear"></div>
+            <div class="space30"></div>
+        </form>
+
     </article>
+  
 </div>
 <!-- Blog content -->
 <!-- Sidebar -->
@@ -83,3 +88,19 @@
 
 </aside>
 <!-- Sidebar -->
+
+@section Scripts{
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+        $j(document).ready(function () {
+            $j('#btnDelete').on('click', function (e) {
+                var isOkay = confirm("Are you sure?");
+                if (isOkay) {
+                    var $form = $j(this).closest('form');
+                     $form.trigger('submit');
+                }
+            });
+           
+        });
+    </script>
+}

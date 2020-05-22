@@ -90,7 +90,7 @@
                 isDelete: obj.initialPreviewShowDelete,
                 caption: obj.initialCaption,
                 actions: function (showUpload, showDelete, disabled, url, key) {
-                    return obj._renderFileActions(showUpload, showDelete, disabled, url, key);
+                    return obj._renderFileActions(false, showDelete, disabled, url, key);
                 }
             };
         },

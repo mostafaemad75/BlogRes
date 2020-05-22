@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,12 @@ namespace MultiCulturalBlog
             Blog = await _context.GetByIdAsync(Id);
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            await _context.RemoveAsync(Id);
+            return RedirectToPage("./Index");
         }
     }
 }

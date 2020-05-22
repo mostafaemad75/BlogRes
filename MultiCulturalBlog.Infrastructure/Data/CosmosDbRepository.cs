@@ -100,7 +100,32 @@ namespace MultiCulturalBlog.Infrastructure.Data
                 throw;
             }
         }
+        public async Task DeleteAsync(string Id)
+        {
+            try
+            {
+                var cosmosDbClient = _cosmosDbClientFactory.GetClient(CollectionName);
+                await cosmosDbClient.DeleteDocumentAsync(Id, new RequestOptions
+                {
+                    PartitionKey = ResolvePartitionKey(Id)
+                });
+            }
+            catch (DocumentClientException e)
+            {
+                if (e.StatusCode == HttpStatusCode.NotFound)
+                {
+                    throw new EntityNotFoundException();
+                }
 
+                throw;
+            }
+        }
+
+        public async Task<bool> RemoveAsync(string id)
+        {
+            var cosmosDbClient = _cosmosDbClientFactory.GetClient(CollectionName);
+            return await cosmosDbClient.RemoveAsync(id, new RequestOptions() { PartitionKey = new PartitionKey(Undefined.Value) });
+        }
         public Task<T> FirstOrDefaultAsync(Func<T, bool> predicate)
         {
             throw new NotImplementedException();
