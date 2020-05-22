@@ -328,6 +328,17 @@
           "MultiCulturalBlog.dll": {}
         }
       },
+      "AsyncLazy/1.6.4": {
+        "runtime": {
+          "lib/netcoreapp2.0/AsyncLazy.dll": {
+            "assemblyVersion": "1.6.4.0",
+            "fileVersion": "1.6.0.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp2.0/AsyncLazy.dll": {}
+        }
+      },
       "Azure.Core/1.2.1": {
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "1.0.0",
@@ -2030,6 +2041,7 @@
       },
       "MultiCulturalBlog.Infrastructure/1.0.0": {
         "dependencies": {
+          "AsyncLazy": "1.6.4",
           "Microsoft.Azure.Cosmos": "3.9.1",
           "Microsoft.Azure.DocumentDB.Core": "2.10.3",
           "MultiCulturalBlog.Model": "1.0.0"
@@ -3748,6 +3760,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AsyncLazy/1.6.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PXVZs7ryLWqiHg3wd5vLEyKZm9L/6IxHsyV5NZi/jZ+XavVNm/2pBaBVno67RO0/MtdTkYlTTI6TOAiFCVWYoQ==",
+      "path": "asynclazy/1.6.4",
+      "hashPath": "asynclazy.1.6.4.nupkg.sha512"
     },
     "Azure.Core/1.2.1": {
       "type": "package",

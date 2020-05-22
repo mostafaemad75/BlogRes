@@ -58,7 +58,7 @@ namespace MultiCulturalBlog
                         var isUploaded = await StorageHelper.UploadFileToStorage(fileStream, serverfileName, _bolbStorageConfig, FileType.Image);
                         if (isUploaded)
                         {
-                            Blog.PhotoUrl = $"https://${_bolbStorageConfig.AccountName}.blob.core.windows.net/${_bolbStorageConfig.ImageContainer}/${serverfileName}";
+                            Blog.PhotoUrl = $"https://{_bolbStorageConfig.AccountName}.blob.core.windows.net/{_bolbStorageConfig.ImageContainer}/{serverfileName}";
                         }
                     }
                    
@@ -93,11 +93,11 @@ namespace MultiCulturalBlog
                             Extension = extension,
                             OriginalFileName = originalFileName,
                             ServerFileName = serverfileName,
-                            FileUrl = $"https://${_bolbStorageConfig.AccountName}.blob.core.windows.net/${_bolbStorageConfig.FileContainer}/{serverfileName}.${extension}"
+                            FileUrl = $"https://{_bolbStorageConfig.AccountName}.blob.core.windows.net/{_bolbStorageConfig.FileContainer}/{serverfileName}.{extension}"
                         };
                         using (fileStream = Attachments[i].OpenReadStream())
                         {
-                            await StorageHelper.UploadFileToStorage(fileStream, PicturFile.FileName, _bolbStorageConfig, FileType.File);
+                            await StorageHelper.UploadFileToStorage(fileStream, $"{serverfileName}.{extension}", _bolbStorageConfig, FileType.File);
                         }
                        
                         fileStream.Dispose();

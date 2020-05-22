@@ -11,6 +11,6 @@ namespace MultiCulturalBlog.Infrastructure.Data
 
         public override string CollectionName { get; } = "blogrescontainer";
         public override string GenerateId(Blog entity) => $"{Guid.NewGuid()}";
-        public override PartitionKey ResolvePartitionKey(string entityId) => new PartitionKey(entityId.Split(':')[0]);
+        public override PartitionKey ResolvePartitionKey(string entityId) => new PartitionKey(entityId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
@@ -8,8 +9,7 @@ namespace MultiCulturalBlog.Infrastructure.Data
 {
     public interface ICosmosDbClient
     {
-        Task<Document> ReadDocumentAsync(string documentId, RequestOptions options = null,
-           CancellationToken cancellationToken = default(CancellationToken));
+        Task<Document> ReadDocumentAsync(string documentId);
 
         Task<Document> CreateDocumentAsync(object document, RequestOptions options = null,
             bool disableAutomaticIdGeneration = false,
@@ -19,6 +19,8 @@ namespace MultiCulturalBlog.Infrastructure.Data
             CancellationToken cancellationToken = default(CancellationToken));
 
         Task<Document> DeleteDocumentAsync(string documentId, RequestOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken));
+        Task<IEnumerable<T>> ReadAllDocumentAsync<T>(RequestOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -143,3 +143,6 @@ C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\bin\Deb
 C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\obj\Debug\netcoreapp3.1\MultiCulturalBlog.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\obj\Debug\netcoreapp3.1\MultiCulturalBlog.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\bin\Debug\netcoreapp3.1\AsyncLazy.dll
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\obj\Debug\netcoreapp3.1\Razor\Pages\Blog\Index.cshtml.g.cs
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\obj\Debug\netcoreapp3.1\Razor\Pages\Blog\Details.cshtml.g.cs

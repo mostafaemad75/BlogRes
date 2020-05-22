@@ -1,0 +1,85 @@
+﻿@page  "{Id}"
+@model MultiCulturalBlog.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<style>
+    .post ul.apply-ink a {
+        font-size: 18px;
+    }
+</style>
+<!-- Blog content -->
+<div class="col-md-9 blogpost">
+    <article class="post">
+        <div class="post-thumb">
+            <img src="@Model.Blog.PhotoUrl" width="690" height="310" class="img-responsive" alt="img">
+        </div>
+        <h3><a href="#">@Model.Blog.Title</a></h3>
+        <div class="blog-meta"><span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @Model.Blog.CreationDate.ToString("s")</span> </div>
+        <div class="space20"></div>
+        <p>
+            @Model.Blog.Body
+        </p>
+        <div class="space20"></div>
+        @if (Model.Blog.VideoUrls.Length > 0)
+        {
+            <h3>Videos</h3>
+            <div class="space30"></div>
+            @foreach (var video in Model.Blog.VideoUrls)
+            {
+                <div class="video">
+                    <iframe src="@video" class="full-video" height="300"></iframe>
+                </div>
+                <div class="space20"></div>
+            }
+        }
+
+        @if (Model.Blog.Attachments.Length > 0)
+        {
+            <h3>Attachments</h3>
+            <div class="space30"></div>
+
+            <div class="row">
+                @foreach (var attachment in Model.Blog.Attachments)
+                {
+                   
+                        <div class="col-md-4 service-content">
+                            <a href="@attachment.FileUrl" target="_blank">
+                                <i class="icon-folder-download2"></i>
+                                <h4>@attachment.OriginalFileName</h4>
+                            </a>
+                        </div>
+                    
+                }
+            </div>
+
+            <div class="space20"></div>
+        }
+
+        <div class="clear"></div>
+        <div class="space30"></div>
+    </article>
+</div>
+<!-- Blog content -->
+<!-- Sidebar -->
+<aside class="col-md-3">
+
+
+    <div class="side-widget">
+        <h5>Archives</h5>
+        <ul class="side-list">
+            <li><a href="#">&rarr; December 2014 <span>(23)</span></a></li>
+            <li><a href="#">&rarr; November 2014 <span>(29)</span></a></li>
+            <li><a href="#">&rarr; October 2014 <span>(31)</span></a></li>
+            <li><a href="#">&rarr; September 2014 <span>(14)</span></a></li>
+            <li><a href="#">&rarr; August 2014 <span>(44)</span></a></li>
+            <li><a href="#">&rarr; July 2014 <span>(27)</span></a></li>
+            <li><a href="#">&rarr; June 2014 <span>(18)</span></a></li>
+        </ul>
+    </div>
+
+    <div class="space60"></div>
+
+</aside>
+<!-- Sidebar -->

@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AsyncLazy;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+
 
 namespace MultiCulturalBlog.Infrastructure.Data
 {
@@ -11,19 +15,47 @@ namespace MultiCulturalBlog.Infrastructure.Data
         private readonly string _databaseName;
         private readonly string _collectionName;
         private readonly IDocumentClient _documentClient;
-
+        private readonly AsyncLazy<Database> _database;
+        private AsyncLazy<DocumentCollection> _collection;
         public CosmosDbClient(string databaseName, string collectionName, IDocumentClient documentClient)
         {
             _databaseName = databaseName ?? throw new ArgumentNullException(nameof(databaseName));
             _collectionName = collectionName ?? throw new ArgumentNullException(nameof(collectionName));
             _documentClient = documentClient ?? throw new ArgumentNullException(nameof(documentClient));
+            _database = new AsyncLazy<Database>(async () => await GetOrCreateDatabaseAsync());
+            _collection = new AsyncLazy<DocumentCollection>(async () => await GetOrCreateCollectionAsync());
+        }
+        private async Task<Database> GetOrCreateDatabaseAsync()
+        {
+            Database database = _documentClient.CreateDatabaseQuery()
+                .Where(db => db.Id == _databaseName).ToArray().FirstOrDefault();
+            if (database == null)
+            {
+                database = await _documentClient.CreateDatabaseAsync(
+                    new Database { Id = _databaseName });
+            }
+
+            return database;
         }
 
-        public async Task<Document> ReadDocumentAsync(string documentId, RequestOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+        private async Task<DocumentCollection> GetOrCreateCollectionAsync()
         {
-            return await _documentClient.ReadDocumentAsync(
-                UriFactory.CreateDocumentUri(_databaseName, _collectionName, documentId), options, cancellationToken);
+            DocumentCollection collection = _documentClient.CreateDocumentCollectionQuery((await _database.GetValueAsync()).SelfLink).Where(c => c.Id == _collectionName).ToArray().FirstOrDefault();
+
+            if (collection == null)
+            {
+                collection = new DocumentCollection { Id = _collectionName };
+
+                collection = await _documentClient.CreateDocumentCollectionAsync((await _database.GetValueAsync()).SelfLink, collection);
+            }
+
+            return collection;
+        }
+
+        public async Task<Document> ReadDocumentAsync(string documentId)
+        {
+            var documents = _documentClient.CreateDocumentQuery((await _collection.GetValueAsync()).SelfLink).AsEnumerable();
+            return documents.Where(d => d.Id == documentId.ToString()).ToList().FirstOrDefault();           
         }
 
         public async Task<Document> CreateDocumentAsync(object document, RequestOptions options = null,
@@ -48,5 +80,13 @@ namespace MultiCulturalBlog.Infrastructure.Data
             return await _documentClient.DeleteDocumentAsync(
                 UriFactory.CreateDocumentUri(_databaseName, _collectionName, documentId), options, cancellationToken);
         }
+
+        public async Task<IEnumerable<T>> ReadAllDocumentAsync<T>(RequestOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _documentClient.CreateDocumentQuery<T>(
+                (await _collection.GetValueAsync()).SelfLink).AsEnumerable();
+        }
+
     }
 }

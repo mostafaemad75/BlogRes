@@ -34,7 +34,16 @@ namespace MultiCulturalBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddRazorPages()
+                 .AddRazorPagesOptions(options =>
+                 {
+                     options.Conventions.AddPageRoute("/Blog/Index", "/");
+                     options.Conventions.AddPageRoute("/Blog/Index", "home");
+                     options.Conventions.AddPageRoute("/Blog/Index", "index");
+                     options.Conventions.AddPageRoute("/Blog/Index", "/Blog/Index");
+                     options.Conventions.AddPageRoute("/Blog/Create", "/Blog/Create");
+                     options.Conventions.AddPageRoute("/Blog/Details", "/Blog/Details/{Id}");
+                 });
             var cultures = new[]
                 {
                     new CultureInfo("fr"),
@@ -78,7 +87,7 @@ namespace MultiCulturalBlog
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -91,6 +100,6 @@ namespace MultiCulturalBlog
                 endpoints.MapRazorPages();
             });
         }
-      
+
     }
 }

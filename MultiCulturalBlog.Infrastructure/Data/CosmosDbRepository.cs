@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 using MultiCulturalBlog.Model.Exceptions;
 using MultiCulturalBlog.Model.Interfaces;
 using MultiCulturalBlog.Model;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Collections.Generic;
 
 namespace MultiCulturalBlog.Infrastructure.Data
 {
@@ -24,10 +27,7 @@ namespace MultiCulturalBlog.Infrastructure.Data
             try
             {
                 var cosmosDbClient = _cosmosDbClientFactory.GetClient(CollectionName);
-                var document = await cosmosDbClient.ReadDocumentAsync(id, new RequestOptions
-                {
-                    PartitionKey = ResolvePartitionKey(id)
-                });
+                var document = await cosmosDbClient.ReadDocumentAsync(id);
 
                 return JsonConvert.DeserializeObject<T>(document.ToString());
             }
@@ -101,8 +101,36 @@ namespace MultiCulturalBlog.Infrastructure.Data
             }
         }
 
+        public Task<T> FirstOrDefaultAsync(Func<T, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IQueryable<T>> WhereAsync(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> CountAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> CountAsync(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            var cosmosDbClient = _cosmosDbClientFactory.GetClient(CollectionName);
+            var documents = await cosmosDbClient.ReadAllDocumentAsync<T>();
+            return documents;
+        }
         public abstract string CollectionName { get; }
         public virtual string GenerateId(T entity) => Guid.NewGuid().ToString();
         public virtual PartitionKey ResolvePartitionKey(string entityId) => null;
+
+
     }
 }
