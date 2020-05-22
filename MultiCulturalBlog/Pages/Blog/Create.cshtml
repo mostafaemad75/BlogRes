@@ -1,0 +1,84 @@
+﻿@page
+@model MultiCulturalBlog.CreateModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-9">
+    <div id="first">
+        <h3>Billing Address</h3>
+        <div class="racc">
+            <div class="toggle-content">
+                <form method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label>Blog title</label>
+                        <input asp-for="Blog.Title" class="form-control" />
+                        <span asp-validation-for="Blog.Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Blog.Body">Blog body</label>
+                        <textarea id="Blog_Body" name="Blog.Body" class="form-control" rows="15"></textarea>
+                        <span asp-validation-for="Blog.Body" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label">Blog photo</label>
+                        <input type="file" name="PicturFile" class="form-control" />
+
+                        <span asp-validation-for="Blog.PhotoUrl" class="text-danger"></span>
+
+                        @*<div class="col-md-3">
+                                <img width="150" height="100" class="img-responsive" src="https://blogresfiles.blob.core.windows.net/images/19942748_333979503699149_5572582415160541234_o.jpg" />
+                            </div>*@
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Blog.VideoUrls" class="control-label">Video Urls</label>
+                        <div id="dvVideoUrls">
+
+                        </div>
+                        <input type="button" class="btn btn-primary" value="Add New" id="btnAddVideo" />
+                        <span asp-validation-for="Blog.VideoUrls" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Attachment(s)
+                            (Attach multiple files.)
+                        </label>
+
+                        <span class="btn btn-default btn-file">
+                            <input id="input-2" name="Attachments[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                        </span>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+        $j(document).ready(function () {
+            var index = 0;
+            var videoInput = '<div><input type="text" name="Blog.VideoUrls[##Index##]" class="form-control" /><div class="space10"></div></div>';
+            addnewvideo();
+            $j('#btnAddVideo').click(function () {
+                addnewvideo();
+            });
+            function addnewvideo() {
+                $j('#dvVideoUrls').append(videoInput.replace("##Index##", index));
+                index++;
+            }
+        });
+    </script>
+}

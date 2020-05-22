@@ -1,0 +1,7 @@
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Model\bin\Debug\netcoreapp3.1\MultiCulturalBlog.Model.deps.json
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Model\bin\Debug\netcoreapp3.1\MultiCulturalBlog.Model.dll
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Model\bin\Debug\netcoreapp3.1\MultiCulturalBlog.Model.pdb
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Model\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Model.AssemblyInfoInputs.cache
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Model\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Model.AssemblyInfo.cs
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Model\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Model.dll
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Model\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Model.pdb

@@ -19,22 +19,8 @@ using MultiCulturalBlog;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 4 "C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\Pages\_ViewImports.cshtml"
-using LazZiya.TagHelpers;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 6 "C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\Pages\_ViewImports.cshtml"
-using LazZiya.TagHelpers.Localization;
-
-#line default
-#line hidden
-#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a0906750319c55d6ce48b545e707c28c2eb4094c", @"/Pages/Privacy.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"dd8080b6ce798618a2a40d5cce9200e361d9ce46", @"/Pages/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"639be29c52ca945a0ab07e61f9876105ae851f6f", @"/Pages/_ViewImports.cshtml")]
     public class Pages_Privacy : global::Microsoft.AspNetCore.Mvc.RazorPages.Page
     {
         #pragma warning disable 1998

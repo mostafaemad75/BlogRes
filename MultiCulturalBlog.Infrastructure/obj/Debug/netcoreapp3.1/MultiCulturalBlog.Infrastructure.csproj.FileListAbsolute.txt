@@ -1,0 +1,14 @@
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\bin\Debug\netcoreapp3.1\MultiCulturalBlog.Infrastructure.deps.json
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\bin\Debug\netcoreapp3.1\MultiCulturalBlog.Infrastructure.dll
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Infrastructure.AssemblyInfo.cs
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\bin\Debug\netcoreapp3.1\Microsoft.Azure.Cosmos.ServiceInterop.dll
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\bin\Debug\netcoreapp3.1\Cosmos.CRTCompat.dll
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\bin\Debug\netcoreapp3.1\Microsoft.Azure.Documents.ServiceInterop.dll
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\bin\Debug\netcoreapp3.1\MultiCulturalBlog.Infrastructure.pdb
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\bin\Debug\netcoreapp3.1\MultiCulturalBlog.Model.dll
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\bin\Debug\netcoreapp3.1\MultiCulturalBlog.Model.pdb
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Infrastructure.csproj.CopyComplete
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Infrastructure.dll
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog.Infrastructure\obj\Debug\netcoreapp3.1\MultiCulturalBlog.Infrastructure.pdb

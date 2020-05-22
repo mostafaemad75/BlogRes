@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "MultiCulturalBlog.Model/1.0.0": {
+        "runtime": {
+          "MultiCulturalBlog.Model.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MultiCulturalBlog.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

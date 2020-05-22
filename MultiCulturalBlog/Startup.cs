@@ -13,6 +13,12 @@ using System.Globalization;
 using MultiCulturalBlog.LocalizationResources;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos;
+using MultiCulturalBlog.Infrastructure.Data;
+using MultiCulturalBlog.Options;
+using MultiCulturalBlog.Extensions;
+using MultiCulturalBlog.Model.Interfaces;
+using MultiCulturalBlog.Models;
 
 namespace MultiCulturalBlog
 {
@@ -34,6 +40,15 @@ namespace MultiCulturalBlog
                     new CultureInfo("fr"),
                     new CultureInfo("en"),
                 };
+
+            // Bind database options. Invalid configuration will terminate the application startup.
+            var connectionStringsOptions =
+              Configuration.GetSection("ConnectionStrings").Get<ConnectionStringsOptions>();
+            var cosmosDbOptions = Configuration.GetSection("CosmosDb").Get<CosmosDbOptions>();
+            var (serviceEndpoint, authKey) = connectionStringsOptions.ActiveConnectionStringOptions;
+            var (databaseName, collectionData) = cosmosDbOptions;
+            var collectionNames = collectionData.Select(c => c.Name).ToList();
+            services.Configure<AzureStorageConfig>(Configuration.GetSection("AzureStorageConfig"));
             services.AddMvc()
              .AddExpressLocalization<ExpressLocalizationResource, ViewLocalizationResource>(
              ops =>
@@ -46,6 +61,8 @@ namespace MultiCulturalBlog
                      o.DefaultRequestCulture = new RequestCulture("en");
                  };
              });
+            services.AddCosmosDb(serviceEndpoint, authKey, databaseName, collectionNames);
+            services.AddScoped<IBlogRepository, BlogRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,5 +91,6 @@ namespace MultiCulturalBlog
                 endpoints.MapRazorPages();
             });
         }
+      
     }
 }
