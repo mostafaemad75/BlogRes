@@ -16,13 +16,13 @@ namespace MultiCulturalBlog
 {
     public class CreateModel : PageModel
     {
-        private readonly AzureStorageConfig _bolbStorageConfig = null;
+        private readonly ICommonHelper _commandHelper;
         private readonly IBlogRepository _context;
 
-        public CreateModel(IBlogRepository context, IOptions<AzureStorageConfig> config)
+        public CreateModel(IBlogRepository context, ICommonHelper commandHelper)
         {
             _context = context;
-            _bolbStorageConfig = config.Value;
+            _commandHelper = commandHelper;
         }
         public IActionResult OnGet()
         {
@@ -40,29 +40,12 @@ namespace MultiCulturalBlog
             {
                 return Page();
             }
-            int indexOfFileDot = 0;
-            var serverfileName = "";
-            var originalFileName = "";
-            var extension = "";
-            Stream fileStream;
             if (PicturFile.Length > 0)
             {
                 if (StorageHelper.IsImage(PicturFile))
                 {
-                    indexOfFileDot = PicturFile.FileName.IndexOf(".");
-                    extension = PicturFile.FileName.Substring(indexOfFileDot + 1, PicturFile.FileName.Length - indexOfFileDot - 1);
-                    serverfileName = string.Format("{0}.{1}", DateTime.Now.Ticks.ToString(), extension);
-                    originalFileName = PicturFile.FileName.Substring(0, indexOfFileDot);
-                    using (fileStream = PicturFile.OpenReadStream())
-                    {
-                        var isUploaded = await StorageHelper.UploadFileToStorage(fileStream, serverfileName, _bolbStorageConfig, FileType.Image);
-                        if (isUploaded)
-                        {
-                            Blog.PhotoUrl = $"https://{_bolbStorageConfig.AccountName}.blob.core.windows.net/{_bolbStorageConfig.ImageContainer}/{serverfileName}";
-                        }
-                    }
-                   
-                    fileStream.Dispose();
+                    var uploadedPic = await _commandHelper.UploadFileAsync(PicturFile, FileType.Image);
+                    Blog.PhotoUrl = uploadedPic.FileUrl;
                 }
                 else
                 {
@@ -79,33 +62,12 @@ namespace MultiCulturalBlog
 
                     for (var i = 0; i < Attachments.Count; i++)
                     {
-                        indexOfFileDot = Attachments[i].FileName.IndexOf(".");
-
-                        serverfileName = Attachments[i].FileName.Substring(0, indexOfFileDot) + "_" + DateTime.Now.Ticks.ToString();
-
-                        originalFileName = Attachments[i].FileName.Substring(0, indexOfFileDot);
-
-                        extension = Attachments[i].FileName.Substring(indexOfFileDot + 1, Attachments[i].FileName.Length - indexOfFileDot - 1);
-
-                        Blog.Attachments[i] = new Attachment()
-                        {
-                            ContentType = Attachments[i].ContentType,
-                            Extension = extension,
-                            OriginalFileName = originalFileName,
-                            ServerFileName = serverfileName,
-                            FileUrl = $"https://{_bolbStorageConfig.AccountName}.blob.core.windows.net/{_bolbStorageConfig.FileContainer}/{serverfileName}.{extension}"
-                        };
-                        using (fileStream = Attachments[i].OpenReadStream())
-                        {
-                            await StorageHelper.UploadFileToStorage(fileStream, $"{serverfileName}.{extension}", _bolbStorageConfig, FileType.File);
-                        }
-                       
-                        fileStream.Dispose();
+                        Blog.Attachments[i] = await _commandHelper.UploadFileAsync(Attachments[i], FileType.File);
                     }
                 }
             }
             Blog.CreationDate = DateTime.Now;
-            var toDo = await _context.AddAsync(Blog);
+            await _context.AddAsync(Blog);
             return RedirectToPage("./Index");
         }
     }

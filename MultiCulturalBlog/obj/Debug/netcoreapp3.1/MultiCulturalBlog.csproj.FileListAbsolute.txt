@@ -146,3 +146,4 @@ C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\obj\Deb
 C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\bin\Debug\netcoreapp3.1\AsyncLazy.dll
 C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\obj\Debug\netcoreapp3.1\Razor\Pages\Blog\Index.cshtml.g.cs
 C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\obj\Debug\netcoreapp3.1\Razor\Pages\Blog\Details.cshtml.g.cs
+C:\Users\Mostafa Elomda\source\repos\MultiCulturalBlog\MultiCulturalBlog\obj\Debug\netcoreapp3.1\Razor\Pages\Blog\Update.cshtml.g.cs

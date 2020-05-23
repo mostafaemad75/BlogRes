@@ -1,0 +1,156 @@
+﻿@page  "{Id}"
+@model MultiCulturalBlog.UpdateModel
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-9">
+    <div id="first">
+        <h3>Update Blog Details</h3>
+        <div class="racc">
+            <div class="toggle-content">
+                <form method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label>Blog title</label>
+                        <input asp-for="Entity.Title" class="form-control" value="@Model.Blog.Title" />
+                        <span asp-validation-for="Entity.Title" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" name="Entity.CreationDate" value="@Model.Blog.CreationDate" />
+                    <input type="hidden" name="Entity.Id" value="@Model.Blog.Id" />
+                    <div class="form-group">
+                        <label for="Blog.Body">Blog body</label>
+                        <textarea id="Blog_Body" name="Entity.Body" class="form-control" rows="15">
+                            @Model.Blog.Body
+                        </textarea>
+                        <span asp-validation-for="Entity.Body" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label">Blog photo</label>
+                        <input type="file" name="PicturFile" class="form-control" />
+
+                        <span asp-validation-for="Entity.PhotoUrl" class="text-danger"></span>
+                        <div class="space10"></div>
+                        <img style="max-height:100px; max-width:500px" src="@Model.Blog.PhotoUrl" />
+
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Entity.VideoUrls" class="control-label">Embed Video Urls</label>
+                        <div id="dvVideoUrls">
+                            @for (int i = 0; i < Model.Blog.VideoUrls.Length; i++)
+                            {
+                                <div class="videodv">
+                                    <div class="input-group">
+                                        <input type="text" name="Entity.VideoUrls[@i]" value="@Model.Blog.VideoUrls[i]" class="form-control" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-danger delete-video" data-index="@i">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="space10"></div>
+                                </div>
+                            }
+                        </div>
+                        <input type="button" class="btn btn-primary" value="Add New" id="btnAddVideo" />
+                        <span asp-validation-for="Entity.VideoUrls" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Attachment(s)
+                            (Attach multiple files.)
+                        </label>
+
+                        <span class="btn btn-default btn-file">
+                            <input id="input-2" name="Attachments[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                        </span>
+                        <div class="row">
+                            <div class="file-preview-thumbnails">
+                                @for (var i = 0; i < Model.Blog.Attachments.Length; i++)
+                                {
+                                    <div class="file-preview-frame attachment-dv" id="@Model.Blog.Attachments[i].ServerFileName" data-fileindex="1" title="@Model.Blog.Attachments[i].OriginalFileName" style="width:160px;height:160px;">
+                                        <div class="file-preview-other-frame">
+                                            <div class="file-preview-other">
+                                                <span class="file-icon-4x"><i class="glyphicon glyphicon-file"></i></span>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="Entity.Attachments[@i].ServerFileName" value="@Model.Blog.Attachments[i].ServerFileName" />
+                                        <div class="file-preview-other-footer">
+                                            <div class="file-thumbnail-footer">
+                                                <div class="file-footer-caption" title="@Model.Blog.Attachments[i].OriginalFileName">@Model.Blog.Attachments[i].OriginalFileName </div>
+                                                <div style="text-align:center;">
+                                                    <button class="btn btn-danger delete-attachment" type="button" data-index="@i">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space30"></div>
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+        $j(document).ready(function () {
+            var index = 0;
+            var videoInput = '<div class="videodv"><div class="input-group"><input type="text" name="Entity.VideoUrls[##Index##]" class="form-control" />';
+
+            videoInput += '<span class="input-group-btn">                                               ' +
+                '              <button class="btn btn-danger delete-video" data-index="##Index##">   ' +
+                '                  <i class="fa fa-times"></i>                                ' +
+                '              </button>                                                      ' +
+                '          </span>  </div> </div>  <div class="space10"></div>                                                  ';
+            //addnewvideo();
+            $j('#btnAddVideo').click(function () {
+                addnewvideo();
+            });
+            function addnewvideo() {
+                index = $j('.videodv').length;
+                $j('#dvVideoUrls').append(videoInput.replace("##Index##", index));
+                index++;
+            }
+
+            $j(document).on('click', '.delete-video', function () {
+                var $videoHtml = $j(this).closest('.videodv');
+                $videoHtml.remove();
+                rearrangeVideosIndex();
+            });
+            function rearrangeVideosIndex() {
+                var $videos = $j('.videodv');
+                $j.each($videos, function (index, item) {
+                    $j($j(item).find('input')).attr('name', 'Entity.VideoUrls['+index+']');
+                });
+            }
+
+            $j(document).on('click', '.delete-attachment', function () {
+                var attachmentHtml = $j(this).closest('.file-preview-frame');
+                console.log(attachmentHtml);
+                $j(attachmentHtml).remove();
+                rearrangeAttachmentsIndex();
+            });
+
+            function rearrangeAttachmentsIndex() {
+                var $attachments = $j('.attachment-dv');
+                $j.each($attachments, function (index, item) {
+                    $j($j(item).find('input')).attr('name', 'Entity.Attachments[' + index + '].ServerFileName');
+                });
+            }
+        });
+    </script>
+}

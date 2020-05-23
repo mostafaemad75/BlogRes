@@ -19,6 +19,7 @@ using MultiCulturalBlog.Options;
 using MultiCulturalBlog.Extensions;
 using MultiCulturalBlog.Model.Interfaces;
 using MultiCulturalBlog.Models;
+using MultiCulturalBlog.Helpers;
 
 namespace MultiCulturalBlog
 {
@@ -43,6 +44,7 @@ namespace MultiCulturalBlog
                      options.Conventions.AddPageRoute("/Blog/Index", "/Blog/Index");
                      options.Conventions.AddPageRoute("/Blog/Create", "/Blog/Create");
                      options.Conventions.AddPageRoute("/Blog/Details", "/Blog/Details/{Id}");
+                     options.Conventions.AddPageRoute("/Blog/Update", "/Blog/Update/{Id}");
                  });
             var cultures = new[]
                 {
@@ -72,6 +74,7 @@ namespace MultiCulturalBlog
              });
             services.AddCosmosDb(serviceEndpoint, authKey, databaseName, collectionNames);
             services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<ICommonHelper, CommonHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -6,8 +6,9 @@
 }
 
 <!-- Blog content -->
-    <div class="col-md-9 blogpost">
-        <a class="btn btn-success" href="/Blog/Create">Create New</a>
+<div class="col-md-9 blogpost">
+    <a class="btn btn-success" href="/Blog/Create">Create New</a>
+    <div class="space10"></div>
         @foreach (var blog in Model.LatestBlogs)
         {
             <article class="post">
@@ -28,36 +29,36 @@
         }
 
 
-       
-    </div>
-<!-- Sidebar -->
-<aside class="col-md-3">
-    <div class="side-widget">
-        <h5>Archives</h5>
-        <ul class="side-list">
-            <li><a href="#">&rarr; December 2014 <span>(23)</span></a></li>
-            <li><a href="#">&rarr; November 2014 <span>(29)</span></a></li>
-            <li><a href="#">&rarr; October 2014 <span>(31)</span></a></li>
-            <li><a href="#">&rarr; September 2014 <span>(14)</span></a></li>
-            <li><a href="#">&rarr; August 2014 <span>(44)</span></a></li>
-            <li><a href="#">&rarr; July 2014 <span>(27)</span></a></li>
-            <li><a href="#">&rarr; June 2014 <span>(18)</span></a></li>
-        </ul>
-    </div>
 
-    <div class="space60"></div>
-
-    <div class="side-widget">
-        <h5>Popular Tags</h5>
-        <ul class="tags">
-            <li><a href="#">Art</a></li>
-            <li><a href="#">Apple</a></li>
-            <li><a href="#">Business</a></li>
-            <li><a href="#">Illustration</a></li>
-            <li><a href="#">Photoshop</a></li>
-            <li><a href="#">PSD</a></li>
-            <li><a href="#">Quotes</a></li>
-            <li><a href="#">Web Design</a></li>
-        </ul>
     </div>
-</aside>
+    <!-- Sidebar -->
+    <aside class="col-md-3">
+        <div class="side-widget">
+            <h5>Archives</h5>
+            <ul class="side-list">
+                <li><a href="#">&rarr; December 2014 <span>(23)</span></a></li>
+                <li><a href="#">&rarr; November 2014 <span>(29)</span></a></li>
+                <li><a href="#">&rarr; October 2014 <span>(31)</span></a></li>
+                <li><a href="#">&rarr; September 2014 <span>(14)</span></a></li>
+                <li><a href="#">&rarr; August 2014 <span>(44)</span></a></li>
+                <li><a href="#">&rarr; July 2014 <span>(27)</span></a></li>
+                <li><a href="#">&rarr; June 2014 <span>(18)</span></a></li>
+            </ul>
+        </div>
+
+        <div class="space60"></div>
+
+        <div class="side-widget">
+            <h5>Popular Tags</h5>
+            <ul class="tags">
+                <li><a href="#">Art</a></li>
+                <li><a href="#">Apple</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Illustration</a></li>
+                <li><a href="#">Photoshop</a></li>
+                <li><a href="#">PSD</a></li>
+                <li><a href="#">Quotes</a></li>
+                <li><a href="#">Web Design</a></li>
+            </ul>
+        </div>
+    </aside>
