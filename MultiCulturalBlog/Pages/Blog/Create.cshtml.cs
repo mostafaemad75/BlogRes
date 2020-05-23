@@ -40,7 +40,7 @@ namespace MultiCulturalBlog
             {
                 return Page();
             }
-            if (PicturFile.Length > 0)
+            if (PicturFile != null && PicturFile.Length > 0)
             {
                 if (StorageHelper.IsImage(PicturFile))
                 {
