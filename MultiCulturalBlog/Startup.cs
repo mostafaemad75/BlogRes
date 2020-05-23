@@ -41,7 +41,7 @@ namespace MultiCulturalBlog
                      options.Conventions.AddPageRoute("/Blog/Index", "/");
                      options.Conventions.AddPageRoute("/Blog/Index", "home");
                      options.Conventions.AddPageRoute("/Blog/Index", "index");
-                     options.Conventions.AddPageRoute("/Blog/Index", "/Blog/Index");
+                     options.Conventions.AddPageRoute("/Blog/Index", "/Blog/Index/{Year?}/{Month?}");
                      options.Conventions.AddPageRoute("/Blog/Create", "/Blog/Create");
                      options.Conventions.AddPageRoute("/Blog/Details", "/Blog/Details/{Id}");
                      options.Conventions.AddPageRoute("/Blog/Update", "/Blog/Update/{Id}");

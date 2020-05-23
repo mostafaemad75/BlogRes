@@ -4,6 +4,7 @@ using MultiCulturalBlog.Model;
 using MultiCulturalBlog.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -65,6 +66,55 @@ namespace MultiCulturalBlog.Helpers
             }
 
             return null;
+        }
+
+        public List<Blog> BlogArchiveSearch(IEnumerable<Blog> allBlogs, string Year, string Month)
+        {
+            var LatestBlogs = new List<Blog>();
+            if (
+               !string.IsNullOrEmpty(Year) &&
+               int.TryParse(Year, out int parseYear)
+               )
+            {
+
+                if (
+                    !string.IsNullOrEmpty(Month) &&
+                    DateTime.TryParseExact(Month, "MMM", CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out DateTime monthDate)
+                    )
+                {
+                    LatestBlogs = allBlogs.Where(x =>
+                    x.CreationDate.Year == parseYear &&
+                    x.CreationDate.Month == monthDate.Month
+                    ).ToList();
+                }
+                else
+                {
+                    LatestBlogs = allBlogs.Where(x =>
+                    x.CreationDate.Year == parseYear
+                    ).ToList();
+                }
+            }
+            else
+            {
+                LatestBlogs = allBlogs.Take(3).ToList();
+            }
+            return LatestBlogs;
+        }
+
+        public List<ArchiveModel> GenerateBlogArchiveModel(IEnumerable<Blog> allBlogs)
+        {
+            return allBlogs.GroupBy(x => x.CreationDate.Year).Select(x => new ArchiveModel
+            {
+                Year = x.Key.ToString(),
+                Count = x.Count(),
+                Months = x.GroupBy(y => y.CreationDate.ToString("MMM", CultureInfo.InvariantCulture))
+                        .Select(z => new MonthModel()
+                        {
+                            Month = z.Key.ToString(),
+                            Count = z.Count()
+                        }).ToList()
+            }).ToList();
         }
     }
 }

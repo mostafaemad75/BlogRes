@@ -68,7 +68,7 @@
                                     <div class="file-preview-other-footer">
                                         <div class="file-thumbnail-footer">
                                             <div class="file-footer-caption" title="@Model.Blog.Attachments[i].OriginalFileName">@Model.Blog.Attachments[i].OriginalFileName </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -90,27 +90,18 @@
 <!-- Blog content -->
 <!-- Sidebar -->
 <aside class="col-md-3">
-
-
+    <div class="space60"></div>
     <div class="side-widget">
         <h5>Archives</h5>
-        <ul class="side-list">
-            <li><a href="#">&rarr; December 2014 <span>(23)</span></a></li>
-            <li><a href="#">&rarr; November 2014 <span>(29)</span></a></li>
-            <li><a href="#">&rarr; October 2014 <span>(31)</span></a></li>
-            <li><a href="#">&rarr; September 2014 <span>(14)</span></a></li>
-            <li><a href="#">&rarr; August 2014 <span>(44)</span></a></li>
-            <li><a href="#">&rarr; July 2014 <span>(27)</span></a></li>
-            <li><a href="#">&rarr; June 2014 <span>(18)</span></a></li>
-        </ul>
+        <div id="tree"></div>
     </div>
-
-    <div class="space60"></div>
+    <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
 
 </aside>
 <!-- Sidebar -->
 
 @section Scripts{
+    <script src="~/js/blog-index.js"></script>
     <script type="text/javascript">
         var $j = jQuery.noConflict();
         $j(document).ready(function () {
