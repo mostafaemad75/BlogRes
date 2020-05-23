@@ -46,6 +46,10 @@ namespace MultiCulturalBlog.Helpers
 
         public Attachment[] GetMatchedAttachment(Attachment[] original, Attachment[] modified)
         {
+            if(original == null || modified == null)
+            {
+                return null;
+            }
             var newAttachments = new Attachment[modified.Length];
             
             for(int i = 0; i< modified.Length; i++)

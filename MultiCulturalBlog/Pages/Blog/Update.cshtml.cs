@@ -58,13 +58,13 @@ namespace MultiCulturalBlog
                 }
             }
             Attachment[] newAttachments;
-
+            var attachmentLength = Entity.Attachments == null ? 0 : Entity.Attachments.Length;
             if (Request.Form.Files.Count > 0)
             {
                 Attachments = Request.Form.Files.Where(x => x.Name.Contains("Attachments")).ToList();
                 if (Attachments.Count > 0)
                 {
-                    newAttachments = new Attachment[Entity.Attachments.Length + Attachments.Count];
+                    newAttachments = new Attachment[attachmentLength + Attachments.Count];
                     for (var i = 0; i < Attachments.Count; i++)
                     {
                         newAttachments[i] = await _commandHelper.UploadFileAsync(Attachments[i],FileType.File);
@@ -72,20 +72,25 @@ namespace MultiCulturalBlog
                 }
                 else
                 {
-                    newAttachments = new Attachment[Entity.Attachments.Length];
+                    newAttachments = new Attachment[attachmentLength];
                 }
             }
             else
             {
-                newAttachments = new Attachment[Entity.Attachments.Length];
+                newAttachments = new Attachment[attachmentLength];
             }
+
             var matchedAttachment = _commandHelper.GetMatchedAttachment(Blog.Attachments, Entity.Attachments);
             int index = 0;
-            for (int i = Attachments.Count; i < newAttachments.Length; i++)
+            if(matchedAttachment != null)
             {
-                newAttachments[i] = matchedAttachment[index];
-                index++;
+                for (int i = Attachments.Count; i < newAttachments.Length; i++)
+                {
+                    newAttachments[i] = matchedAttachment[index];
+                    index++;
+                }
             }
+          
             Entity.Attachments = newAttachments;
             await _context.UpdateAsync(Entity);
             return RedirectToPage("/Blog/Details", new { Id = Id });
