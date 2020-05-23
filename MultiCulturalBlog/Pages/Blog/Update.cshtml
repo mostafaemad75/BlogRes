@@ -40,20 +40,24 @@
                     <div class="form-group">
                         <label asp-for="Entity.VideoUrls" class="control-label">Embed Video Urls</label>
                         <div id="dvVideoUrls">
-                            @for (int i = 0; i < Model.Blog.VideoUrls.Length; i++)
+                            @if (Model.Blog.VideoUrls != null)
                             {
-                                <div class="videodv">
-                                    <div class="input-group">
-                                        <input type="text" name="Entity.VideoUrls[@i]" value="@Model.Blog.VideoUrls[i]" class="form-control" />
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-danger delete-video" data-index="@i">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </span>
+                                for (int i = 0; i < Model.Blog.VideoUrls.Length; i++)
+                                {
+                                    <div class="videodv">
+                                        <div class="input-group">
+                                            <input type="text" name="Entity.VideoUrls[@i]" value="@Model.Blog.VideoUrls[i]" class="form-control" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-danger delete-video" data-index="@i">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <div class="space10"></div>
                                     </div>
-                                    <div class="space10"></div>
-                                </div>
+                                }
                             }
+
                         </div>
                         <input type="button" class="btn btn-primary" value="Add New" id="btnAddVideo" />
                         <span asp-validation-for="Entity.VideoUrls" class="text-danger"></span>
@@ -69,27 +73,31 @@
                         </span>
                         <div class="row">
                             <div class="file-preview-thumbnails">
-                                @for (var i = 0; i < Model.Blog.Attachments.Length; i++)
+                                @if (Model.Blog.Attachments != null)
                                 {
-                                    <div class="file-preview-frame attachment-dv" id="@Model.Blog.Attachments[i].ServerFileName" data-fileindex="1" title="@Model.Blog.Attachments[i].OriginalFileName" style="width:160px;height:160px;">
-                                        <div class="file-preview-other-frame">
-                                            <div class="file-preview-other">
-                                                <span class="file-icon-4x"><i class="glyphicon glyphicon-file"></i></span>
+                                    for (var i = 0; i < Model.Blog.Attachments.Length; i++)
+                                    {
+                                        <div class="file-preview-frame attachment-dv" id="@Model.Blog.Attachments[i].ServerFileName" data-fileindex="1" title="@Model.Blog.Attachments[i].OriginalFileName" style="width:160px;height:160px;">
+                                            <div class="file-preview-other-frame">
+                                                <div class="file-preview-other">
+                                                    <span class="file-icon-4x"><i class="glyphicon glyphicon-file"></i></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <input type="hidden" name="Entity.Attachments[@i].ServerFileName" value="@Model.Blog.Attachments[i].ServerFileName" />
-                                        <div class="file-preview-other-footer">
-                                            <div class="file-thumbnail-footer">
-                                                <div class="file-footer-caption" title="@Model.Blog.Attachments[i].OriginalFileName">@Model.Blog.Attachments[i].OriginalFileName </div>
-                                                <div style="text-align:center;">
-                                                    <button class="btn btn-danger delete-attachment" type="button" data-index="@i">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
+                                            <input type="hidden" name="Entity.Attachments[@i].ServerFileName" value="@Model.Blog.Attachments[i].ServerFileName" />
+                                            <div class="file-preview-other-footer">
+                                                <div class="file-thumbnail-footer">
+                                                    <div class="file-footer-caption" title="@Model.Blog.Attachments[i].OriginalFileName">@Model.Blog.Attachments[i].OriginalFileName </div>
+                                                    <div style="text-align:center;">
+                                                        <button class="btn btn-danger delete-attachment" type="button" data-index="@i">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                 }
+
                             </div>
                         </div>
                     </div>
@@ -134,7 +142,7 @@
             function rearrangeVideosIndex() {
                 var $videos = $j('.videodv');
                 $j.each($videos, function (index, item) {
-                    $j($j(item).find('input')).attr('name', 'Entity.VideoUrls['+index+']');
+                    $j($j(item).find('input')).attr('name', 'Entity.VideoUrls[' + index + ']');
                 });
             }
 
