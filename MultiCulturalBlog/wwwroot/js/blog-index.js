@@ -24,7 +24,8 @@ $j(document).ready(function () {
             treeElement.nodes.push({
                 text: archiveData[i].blogs[j].title,
                 href: "/Blog/Details/" + archiveData[i].blogs[j].id,
-                icon: "glyphicon glyphicon-list-alt"
+                icon: "glyphicon glyphicon-list-alt",
+                nodeId: archiveData[i].blogs[j].id
             });
         }
         treeArr.push(treeElement);
@@ -41,5 +42,42 @@ $j(document).ready(function () {
         expandIcon: "",
         collapseIcon: ""
     });
-    
+
+  
+
+    setSelectedChildern();
+    function setSelectedChildern() {
+        var nodeId = $j('#btnEdit').data('id');
+        if (nodeId != null) {
+            $j.each(getAllNodes(), function (index, item) {
+                if (item.href == "/Blog/Details/" + nodeId) {
+                    var parent = $j('#tree').treeview('getParent', item);
+                    $j('#tree').treeview('toggleNodeSelected', [item.nodeId, { silent: true }]);
+                    $j('#tree').treeview('expandNode', [parent.nodeId, { silent: true, ignoreChildren: false }]);
+                    collabseSiblings(parent);
+                   
+                    return false;
+                }
+            });
+        }
+    }
+    $j('#tree').on('nodeExpanded', function (event, data) {
+        collabseSiblings(data);
+    });
+    function getAllNodes() {
+        
+        var treeViewObject = $j('#tree').data('treeview'),
+            allCollapsedNodes = treeViewObject.getCollapsed(),
+            allExpandedNodes = treeViewObject.getExpanded(),
+            allNodes = allCollapsedNodes.concat(allExpandedNodes);
+
+        return allNodes;
+    }
+
+    function collabseSiblings(node) {
+        var $siblings = $j('#tree').treeview('getSiblings', node);
+        $j.each($siblings, function (index, item) {
+            $j('#tree').treeview('collapseNode', [item.nodeId, { silent: true, ignoreChildren: false }]);
+        });
+    }
 });
