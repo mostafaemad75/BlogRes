@@ -11,6 +11,7 @@ namespace MultiCulturalBlog.Model
         [Required(ErrorMessage = "Please type blog title")]
         public string Title { get; set; }
         public string Body { get; set; }
+        public string BodyHtml { get; set; }
         public string PhotoUrl { get; set; }
         public DateTime CreationDate { get; set; }
         public string[] VideoUrls { get; set; }

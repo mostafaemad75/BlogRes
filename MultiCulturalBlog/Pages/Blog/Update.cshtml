@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Pages/Shared/_Layout.cshtml";
+    var htmlText = Model.Blog.BodyHtml == null ?  string.Empty : Model.Blog.BodyHtml; 
 }
 
 <div class="col-md-9">
@@ -19,49 +20,51 @@
                     </div>
                     <input type="hidden" name="Entity.CreationDate" value="@Model.Blog.CreationDate" />
                     <input type="hidden" name="Entity.Id" value="@Model.Blog.Id" />
-                    <div class="form-group">
-                        <label for="Blog.Body">Blog body</label>
-                        <textarea id="Blog_Body" name="Entity.Body" class="form-control" rows="15">
+                    @*<div class="form-group">
+                        <label for="Blog.Body">Blog breif description</label>
+                        <textarea id="Blog_Body" name="Entity.Body" class="form-control" rows="7">
                             @Model.Blog.Body
                         </textarea>
                         <span asp-validation-for="Entity.Body" class="text-danger"></span>
-                    </div>
+                    </div>*@
                     <div class="form-group">
-
+                        <label for="Blog.Body">Html body</label>
+                        <textarea id="summernote" name="Entity.BodyHtml" class="form-control">
+                           @Html.Raw(htmlText.Replace("\r\n", "<br />"))
+                        </textarea>
+                    </div>
+                    @*<div class="form-group">
                         <label class="control-label">Blog photo</label>
                         <input type="file" name="PicturFile" class="form-control" />
-
                         <span asp-validation-for="Entity.PhotoUrl" class="text-danger"></span>
                         <div class="space10"></div>
                         <img style="max-height:100px; max-width:500px" src="@Model.Blog.PhotoUrl" />
-
-
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Entity.VideoUrls" class="control-label">Embed Video Urls</label>
-                        <div id="dvVideoUrls">
-                            @if (Model.Blog.VideoUrls != null)
-                            {
-                                for (int i = 0; i < Model.Blog.VideoUrls.Length; i++)
+                    </div>*@
+                    @*<div class="form-group">
+                            <label asp-for="Entity.VideoUrls" class="control-label">Embed Video Urls</label>
+                            <div id="dvVideoUrls">
+                                @if (Model.Blog.VideoUrls != null)
                                 {
-                                    <div class="videodv">
-                                        <div class="input-group">
-                                            <input type="text" name="Entity.VideoUrls[@i]" value="@Model.Blog.VideoUrls[i]" class="form-control" />
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-danger delete-video" data-index="@i">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </span>
+                                    for (int i = 0; i < Model.Blog.VideoUrls.Length; i++)
+                                    {
+                                        <div class="videodv">
+                                            <div class="input-group">
+                                                <input type="text" name="Entity.VideoUrls[@i]" value="@Model.Blog.VideoUrls[i]" class="form-control" />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-danger delete-video" data-index="@i">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <div class="space10"></div>
                                         </div>
-                                        <div class="space10"></div>
-                                    </div>
+                                    }
                                 }
-                            }
 
-                        </div>
-                        <input type="button" class="btn btn-primary" value="Add New" id="btnAddVideo" />
-                        <span asp-validation-for="Entity.VideoUrls" class="text-danger"></span>
-                    </div>
+                            </div>
+                            <input type="button" class="btn btn-primary" value="Add New" id="btnAddVideo" />
+                            <span asp-validation-for="Entity.VideoUrls" class="text-danger"></span>
+                        </div>*@
                     <div class="form-group">
                         <label>
                             Attachment(s)
@@ -97,7 +100,6 @@
                                         </div>
                                     }
                                 }
-
                             </div>
                         </div>
                     </div>
@@ -117,34 +119,34 @@
         var $j = jQuery.noConflict();
         $j(document).ready(function () {
             var index = 0;
-            var videoInput = '<div class="videodv"><div class="input-group"><input type="text" name="Entity.VideoUrls[##Index##]" class="form-control" />';
+            //var videoInput = '<div class="videodv"><div class="input-group"><input type="text" name="Entity.VideoUrls[##Index##]" class="form-control" />';
 
-            videoInput += '<span class="input-group-btn">                                               ' +
-                '              <button class="btn btn-danger delete-video" data-index="##Index##">   ' +
-                '                  <i class="fa fa-times"></i>                                ' +
-                '              </button>                                                      ' +
-                '          </span>  </div> </div>  <div class="space10"></div>                                                  ';
-            //addnewvideo();
-            $j('#btnAddVideo').click(function () {
-                addnewvideo();
-            });
-            function addnewvideo() {
-                index = $j('.videodv').length;
-                $j('#dvVideoUrls').append(videoInput.replace("##Index##", index));
-                index++;
-            }
+            //videoInput += '<span class="input-group-btn">                                               ' +
+            //    '              <button class="btn btn-danger delete-video" data-index="##Index##">   ' +
+            //    '                  <i class="fa fa-times"></i>                                ' +
+            //    '              </button>                                                      ' +
+            //    '          </span>  </div> </div>  <div class="space10"></div>                                                  ';
+            ////addnewvideo();
+            //$j('#btnAddVideo').click(function () {
+            //    addnewvideo();
+            //});
+            //function addnewvideo() {
+            //    index = $j('.videodv').length;
+            //    $j('#dvVideoUrls').append(videoInput.replace("##Index##", index));
+            //    index++;
+            //}
 
-            $j(document).on('click', '.delete-video', function () {
-                var $videoHtml = $j(this).closest('.videodv');
-                $videoHtml.remove();
-                rearrangeVideosIndex();
-            });
-            function rearrangeVideosIndex() {
-                var $videos = $j('.videodv');
-                $j.each($videos, function (index, item) {
-                    $j($j(item).find('input')).attr('name', 'Entity.VideoUrls[' + index + ']');
-                });
-            }
+            //$j(document).on('click', '.delete-video', function () {
+            //    var $videoHtml = $j(this).closest('.videodv');
+            //    $videoHtml.remove();
+            //    rearrangeVideosIndex();
+            //});
+            //function rearrangeVideosIndex() {
+            //    var $videos = $j('.videodv');
+            //    $j.each($videos, function (index, item) {
+            //        $j($j(item).find('input')).attr('name', 'Entity.VideoUrls[' + index + ']');
+            //    });
+            //}
 
             $j(document).on('click', '.delete-attachment', function () {
                 var attachmentHtml = $j(this).closest('.file-preview-frame');
@@ -159,6 +161,20 @@
                     $j($j(item).find('input')).attr('name', 'Entity.Attachments[' + index + '].ServerFileName');
                 });
             }
+            $j('#summernote').summernote({
+                placeholder: 'Hello stand alone ui',
+                tabsize: 2,
+                height: 350,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
         });
     </script>
 }

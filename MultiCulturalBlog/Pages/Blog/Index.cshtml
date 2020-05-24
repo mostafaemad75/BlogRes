@@ -6,42 +6,41 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+<!-- Sidebar -->
+<aside class="col-md-3">
+
+    <div class="side-widget">
+        <div id="tree"></div>
+    </div>
+    <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
+
+</aside>
 <!-- Blog content -->
-<div class="col-md-9 blogpost">
+<div class="col-md-7 blogpost">
     <a class="btn btn-success" href="/Blog/Create">Create New</a>
     <div class="space10"></div>
     @foreach (var blog in Model.LatestBlogs)
     {
         <article class="post">
-            <div class="post-thumb">
-                <img src="@blog.PhotoUrl" width="690" height="310" style="max-width: 690px; max-height:310px" class="img-responsive" alt="img">
-                <div class="overlay-wrap">
-                    <div class="overlay">
-                        <div class="overlay-inner">
-                            <a href="/Blog/Details/@blog.Id"><i class="fa fa-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <h3><a href="/Blog/Details/@blog.Id">@blog.Title</a></h3>
+            <div class="post-thumb">
+                @if (blog.BodyHtml != null)
+                {
+                    <div class="space20"></div>
+                    <div>
+                        @Html.Raw(blog.BodyHtml.Replace("\r\n", "<br />"))
+                    </div>
+                }
+            </div>
             <div class="blog-meta"><span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @blog.CreationDate.ToString("s")</span> </div>
-            <p>@blog.Body</p>
+            
         </article>
     }
 
 
 
 </div>
-<!-- Sidebar -->
-<aside class="col-md-3">
-    <div class="space60"></div>
-    <div class="side-widget">
-        <h5>Archives</h5>
-        <div id="tree"></div>
-    </div>
-    <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
-
-</aside>
+<div class="col-md-2"></div>
 
 @section Scripts{
     <script src="~/js/blog-index.js"></script>

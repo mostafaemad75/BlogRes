@@ -9,12 +9,12 @@ namespace MultiCulturalBlog.Models
     {
         public string Year { get; set; }
         public int Count { get; set; }
-        public List<MonthModel> Months { get; set; }
+        public List<BlogModel> Blogs { get; set; }
     }
 
-    public class MonthModel
+    public class BlogModel
     {
-        public string Month { get; set; }
-        public int Count { get; set; }
+        public string Title { get; set; }
+        public string Id { get; set; }
     }
 }

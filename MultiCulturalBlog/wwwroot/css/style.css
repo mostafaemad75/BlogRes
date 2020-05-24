@@ -1521,10 +1521,12 @@ footer .container {
 	margin: 0 auto;
 	overflow: hidden;
 }
-
+.list-group-item .node-tree a{
+	font-size: 5px;
+}
 .page-wrap {
-	width: 960px;
-	max-width: 960px;
+	width: 1400px;
+	max-width: 1400px;
 	margin: -20px auto 0;
 	padding: 0 15px 50px;
 }

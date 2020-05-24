@@ -20,11 +20,11 @@ $j(document).ready(function () {
             tags: [archiveData[i].count],
             nodes: []
         };
-        for (var j = 0; j < archiveData[i].months.length; j++) {
+        for (var j = 0; j < archiveData[i].blogs.length; j++) {
             treeElement.nodes.push({
-                text: archiveData[i].months[j].month,
-                href: "/Blog/Index/" + archiveData[i].year + "/" + archiveData[i].months[j].month,
-                tags: [archiveData[i].months[j].count],
+                text: archiveData[i].blogs[j].title,
+                href: "/Blog/Details/" + archiveData[i].blogs[j].id,
+                icon: "glyphicon glyphicon-list-alt"
             });
         }
         treeArr.push(treeElement);
@@ -35,6 +35,11 @@ $j(document).ready(function () {
         data: treeArr,
         enableLinks: true,
         showTags: true,
-        selectedBackColor: "#e96546"
+        selectedBackColor: "#f6f8fa",
+        selectedColor: "#e96546",
+        showBorder: false,
+        expandIcon: "",
+        collapseIcon: ""
     });
+    
 });

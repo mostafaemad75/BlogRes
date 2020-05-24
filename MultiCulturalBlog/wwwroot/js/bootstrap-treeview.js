@@ -584,11 +584,22 @@
 			// Add text
 			if (_this.options.enableLinks) {
 				// Add hyperlink
-				treeItem
-					.append($(_this.template.link)
-						.attr('href', node.href)
-						.append(node.text)
-					);
+				if (!node.nodes) {
+					treeItem
+						.append($(_this.template.link)
+							.attr('href', node.href)
+							.addClass('node-tree-font')
+							.append(node.text)
+						);
+				}
+				else {
+					treeItem
+						.append($(_this.template.link)
+							.attr('href', node.href)
+							.append(node.text)
+						);
+				}
+				
 			}
 			else {
 				// otherwise just text

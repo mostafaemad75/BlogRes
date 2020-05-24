@@ -90,18 +90,18 @@ namespace MultiCulturalBlog.Helpers
                     LatestBlogs = allBlogs.Where(x =>
                     x.CreationDate.Year == parseYear &&
                     x.CreationDate.Month == monthDate.Month
-                    ).ToList();
+                    ).OrderByDescending(x=>x.CreationDate).ToList();
                 }
                 else
                 {
                     LatestBlogs = allBlogs.Where(x =>
                     x.CreationDate.Year == parseYear
-                    ).ToList();
+                    ).OrderByDescending(x => x.CreationDate).ToList();
                 }
             }
             else
             {
-                LatestBlogs = allBlogs.Take(3).ToList();
+                LatestBlogs = allBlogs.OrderByDescending(x => x.CreationDate).Take(3).ToList();
             }
             return LatestBlogs;
         }
@@ -112,13 +112,13 @@ namespace MultiCulturalBlog.Helpers
             {
                 Year = x.Key.ToString(),
                 Count = x.Count(),
-                Months = x.GroupBy(y => y.CreationDate.ToString("MMM", CultureInfo.InvariantCulture))
-                        .Select(z => new MonthModel()
+                Blogs =
+                        x.Select(z => new BlogModel()
                         {
-                            Month = z.Key.ToString(),
-                            Count = z.Count()
+                            Title = z.Title.Length > 40 ? z.Title.Substring(0, 40): z.Title,
+                            Id = z.Id
                         }).ToList()
-            }).ToList();
+            }).OrderByDescending(x => x.Year).ToList();
         }
     }
 }

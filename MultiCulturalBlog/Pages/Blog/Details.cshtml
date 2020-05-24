@@ -4,19 +4,30 @@
     ViewData["Title"] = "Details";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
 <style>
     .post ul.apply-ink a {
         font-size: 18px;
     }
 </style>
+
+<!-- Sidebar -->
+<aside class="col-md-3">
+    <div class="side-widget">
+        <div id="tree"></div>
+    </div>
+    <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
+
+</aside>
+<!-- Sidebar -->
 <!-- Blog content -->
-<div class="col-md-9 blogpost">
+<div class="col-md-7 blogpost">
     <article class="post">
 
         <form method="post">
-            <div class="post-thumb">
+            @*<div class="post-thumb">
                 <img src="@Model.Blog.PhotoUrl" style="max-width: 690px; max-height:310px" width="690" height="310" class="img-responsive" alt="img">
-            </div>
+            </div>*@
             <h3><a href="#">@Model.Blog.Title</a></h3>
             <div class="blog-meta">
                 <span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @Model.Blog.CreationDate.ToString("s")</span>
@@ -30,11 +41,19 @@
                 </span>
 
             </div>
-            <div class="space20"></div>
+            @*<div class="space20"></div>
             <p>
                 @Model.Blog.Body
-            </p>
-            <div class="space20"></div>
+            </p>*@
+            @if (Model.Blog.BodyHtml != null)
+            {
+                <div class="space20"></div>
+                <div>
+                    @Html.Raw(Model.Blog.BodyHtml.Replace("\r\n", "<br />"))
+                </div>
+            }
+
+            @*<div class="space20"></div>
             @if (Model.Blog.VideoUrls != null && Model.Blog.VideoUrls.Length > 0)
             {
                 <h3>Videos</h3>
@@ -46,7 +65,7 @@
                     </div>
                     <div class="space20"></div>
                 }
-            }
+            }*@
 
             @if (Model.Blog.Attachments != null && Model.Blog.Attachments.Length > 0)
             {
@@ -88,17 +107,8 @@
 
 </div>
 <!-- Blog content -->
-<!-- Sidebar -->
-<aside class="col-md-3">
-    <div class="space60"></div>
-    <div class="side-widget">
-        <h5>Archives</h5>
-        <div id="tree"></div>
-    </div>
-    <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
+<div class="col-md-2"></div>
 
-</aside>
-<!-- Sidebar -->
 
 @section Scripts{
     <script src="~/js/blog-index.js"></script>
