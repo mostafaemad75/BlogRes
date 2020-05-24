@@ -4,7 +4,13 @@
     ViewData["Title"] = "Create";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+<aside class="col-md-3">
+    <div class="side-widget">
+        <div id="tree"></div>
+    </div>
+    <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
 
+</aside>
 <div class="col-md-9">
     <div id="first">
         <h3>Creat New Blog</h3>
@@ -19,30 +25,30 @@
                     </div>
 
                     @*<div class="form-group">
-                        <label for="Blog.Body">Blog breif description</label>
-                        <textarea id="Blog_Body" name="Blog.Body" class="form-control" rows="7"></textarea>
-                        <span>Just 200 characters</span>
-                    </div>*@
+                            <label for="Blog.Body">Blog breif description</label>
+                            <textarea id="Blog_Body" name="Blog.Body" class="form-control" rows="7"></textarea>
+                            <span>Just 200 characters</span>
+                        </div>*@
                     <div class="form-group">
                         <label for="Blog.BodyHtml">Html body</label>
-                        <textarea id="summernote" name="Blog.BodyHtml" class="form-control" ></textarea>
+                        <textarea id="summernote" name="Blog.BodyHtml" class="form-control"></textarea>
                     </div>
                     @*<div class="form-group">
 
-                        <label class="control-label">Blog photo</label>
-                        <input type="file" name="PicturFile" class="form-control" />
+                            <label class="control-label">Blog photo</label>
+                            <input type="file" name="PicturFile" class="form-control" />
 
-                        <span asp-validation-for="Blog.PhotoUrl" class="text-danger"></span>
+                            <span asp-validation-for="Blog.PhotoUrl" class="text-danger"></span>
 
-                    </div>*@
+                        </div>*@
                     @*<div class="form-group">
-                        <label asp-for="Blog.VideoUrls" class="control-label">Embed Video Urls</label>
-                        <div id="dvVideoUrls">
+                            <label asp-for="Blog.VideoUrls" class="control-label">Embed Video Urls</label>
+                            <div id="dvVideoUrls">
 
-                        </div>
-                        <input type="button" class="btn btn-primary" value="Add New" id="btnAddVideo" />
-                        <span asp-validation-for="Blog.VideoUrls" class="text-danger"></span>
-                    </div>*@
+                            </div>
+                            <input type="button" class="btn btn-primary" value="Add New" id="btnAddVideo" />
+                            <span asp-validation-for="Blog.VideoUrls" class="text-danger"></span>
+                        </div>*@
                     <div class="form-group">
                         <label>
                             Attachment(s)
@@ -64,8 +70,9 @@
     </div>
 
 </div>
-
+<div class="col-md-2"></div>
 @section Scripts{
+    <script src="~/js/blog-index.js"></script>
     <script type="text/javascript">
         var $j = jQuery.noConflict();
         $j(document).ready(function () {

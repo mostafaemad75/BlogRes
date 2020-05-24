@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MultiCulturalBlog.Helpers;
 using MultiCulturalBlog.Model;
 using MultiCulturalBlog.Model.Interfaces;
+using MultiCulturalBlog.Models;
 
 namespace MultiCulturalBlog
 {
@@ -30,10 +31,12 @@ namespace MultiCulturalBlog
         public IFormFile PicturFile { get; set; }
 
         public List<IFormFile> Attachments { get; set; }
+        public List<ArchiveModel> ArchiveModels { get; set; }
         public async Task<IActionResult> OnGet()
         {
-            Blog = await _context.GetByIdAsync(Id);
-
+            var allBlogs = (await _context.GetAllAsync());
+            Blog = allBlogs.Where(x => x.Id == Id).FirstOrDefault();
+            ArchiveModels = _commandHelper.GenerateBlogArchiveModel(allBlogs);
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()

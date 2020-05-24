@@ -24,8 +24,10 @@ namespace MultiCulturalBlog
             _context = context;
             _commandHelper = commandHelper;
         }
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            var allBlogs = (await _context.GetAllAsync());
+            ArchiveModels = _commandHelper.GenerateBlogArchiveModel(allBlogs);
             return Page();
         }
         [BindProperty]
@@ -34,6 +36,7 @@ namespace MultiCulturalBlog
         public IFormFile PicturFile { get; set; }
 
         public List<IFormFile> Attachments { get; set; }
+        public List<ArchiveModel> ArchiveModels { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
