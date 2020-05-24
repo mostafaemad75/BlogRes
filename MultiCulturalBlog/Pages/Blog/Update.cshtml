@@ -5,13 +5,13 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
     var htmlText = Model.Blog.BodyHtml == null ? string.Empty : Model.Blog.BodyHtml;
 }
-    <aside class="col-md-3">
-        <div class="side-widget">
-            <div id="tree"></div>
-        </div>
-        <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
+<aside class="col-md-3">
+    <div class="side-widget">
+        <div id="tree"></div>
+    </div>
+    <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
 
-    </aside>
+</aside>
 <div class="col-md-7">
     <div id="first">
         <h3>Update Blog Details</h3>
@@ -112,6 +112,7 @@
                     <div class="space30"></div>
                     <div class="form-group">
                         <input type="submit" value="Update" class="btn btn-primary" />
+                        <input type="button" id="btnCancel" value="Cancel" class="btn btn-warning" />
                     </div>
                 </form>
             </div>
@@ -125,7 +126,9 @@
     <script type="text/javascript">
         var $j = jQuery.noConflict();
         $j(document).ready(function () {
-            var index = 0;
+            $j('#btnCancel').click(function () {
+                document.location.href = '/Blog/Index';
+            })
             //var videoInput = '<div class="videodv"><div class="input-group"><input type="text" name="Entity.VideoUrls[##Index##]" class="form-control" />';
 
             //videoInput += '<span class="input-group-btn">                                               ' +

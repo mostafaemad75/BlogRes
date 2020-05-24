@@ -31,9 +31,9 @@
                 </div>*@
             <h3><a href="#">@Model.Blog.Title</a></h3>
             <div class="blog-meta">
-                <span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @Model.Blog.CreationDate.ToString("s")</span>
+                <span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @Model.Blog.CreationDate.ToString("dddd, dd MMMM yyyy hh:mm tt")</span>
                 <span>
-                    <button class="btn btn-primary btn-xs btn-brown uppercase" id="btnDelete"><span><i class="fa fa-times"></i> Delete</span></button>
+                    <button class="btn btn-primary btn-xs btn-brown uppercase" type="button" id="btnDelete"><span><i class="fa fa-times"></i> Delete</span></button>
                 </span>
                 <span>
                     <button class="btn btn-primary btn-xs btn-blue uppercase" id="btnEdit" type="button" data-id="@Model.Id">
@@ -118,7 +118,7 @@
         $j(document).ready(function () {
             $j('#btnDelete').on('click', function (e) {
                 var isOkay = confirm("Are you sure?");
-                if (isOkay) {
+                if (isOkay == true) {
                     var $form = $j(this).closest('form');
                     $form.trigger('submit');
                 }
