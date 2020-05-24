@@ -47,7 +47,7 @@ $j(document).ready(function () {
 
     setSelectedChildern();
     function setSelectedChildern() {
-        var nodeId = $j('#btnEdit').data('id');
+        var nodeId = $j('#hdfModelField').val();
         if (nodeId != null) {
             $j.each(getAllNodes(), function (index, item) {
                 if (item.href == "/Blog/Details/" + nodeId) {

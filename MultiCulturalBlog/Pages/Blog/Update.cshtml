@@ -5,13 +5,13 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
     var htmlText = Model.Blog.BodyHtml == null ? string.Empty : Model.Blog.BodyHtml;
 }
-<aside class="col-md-3">
-    <div class="side-widget">
-        <div id="tree"></div>
-    </div>
-    <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
-
-</aside>
+    <aside class="col-md-3">
+        <div class="side-widget">
+            <div id="tree"></div>
+        </div>
+        <input type="hidden" value="@Json.Serialize(Model.ArchiveModels).ToString()" id="hdfArchive" />
+        <input type="hidden" ID="hdfModelField" name="Entity.Id" value="@Model.Blog.Id" />
+    </aside>
 <div class="col-md-7">
     <div id="first">
         <h3>Update Blog Details</h3>
