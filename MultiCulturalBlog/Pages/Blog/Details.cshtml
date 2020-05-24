@@ -22,12 +22,13 @@
 <!-- Sidebar -->
 <!-- Blog content -->
 <div class="col-md-7 blogpost">
+    <a class="btn btn-success" href="/Blog/Create">Create New</a>
+    <div class="space10"></div>
     <article class="post">
-
         <form method="post">
             @*<div class="post-thumb">
-                <img src="@Model.Blog.PhotoUrl" style="max-width: 690px; max-height:310px" width="690" height="310" class="img-responsive" alt="img">
-            </div>*@
+                    <img src="@Model.Blog.PhotoUrl" style="max-width: 690px; max-height:310px" width="690" height="310" class="img-responsive" alt="img">
+                </div>*@
             <h3><a href="#">@Model.Blog.Title</a></h3>
             <div class="blog-meta">
                 <span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @Model.Blog.CreationDate.ToString("s")</span>
@@ -42,9 +43,9 @@
 
             </div>
             @*<div class="space20"></div>
-            <p>
-                @Model.Blog.Body
-            </p>*@
+                <p>
+                    @Model.Blog.Body
+                </p>*@
             @if (Model.Blog.BodyHtml != null)
             {
                 <div class="space20"></div>
@@ -54,18 +55,18 @@
             }
 
             @*<div class="space20"></div>
-            @if (Model.Blog.VideoUrls != null && Model.Blog.VideoUrls.Length > 0)
-            {
-                <h3>Videos</h3>
-                <div class="space30"></div>
-                @foreach (var video in Model.Blog.VideoUrls)
+                @if (Model.Blog.VideoUrls != null && Model.Blog.VideoUrls.Length > 0)
                 {
-                    <div class="video">
-                        <iframe src="@video" class="full-video" height="300"></iframe>
-                    </div>
-                    <div class="space20"></div>
-                }
-            }*@
+                    <h3>Videos</h3>
+                    <div class="space30"></div>
+                    @foreach (var video in Model.Blog.VideoUrls)
+                    {
+                        <div class="video">
+                            <iframe src="@video" class="full-video" height="300"></iframe>
+                        </div>
+                        <div class="space20"></div>
+                    }
+                }*@
 
             @if (Model.Blog.Attachments != null && Model.Blog.Attachments.Length > 0)
             {

@@ -23,6 +23,10 @@
     {
         <article class="post">
             <h3><a href="/Blog/Details/@blog.Id">@blog.Title</a></h3>
+            <div class="blog-meta">
+                <span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @blog.CreationDate.ToString("s")</span>
+               
+            </div>
             <div class="post-thumb">
                 @if (blog.BodyHtml != null)
                 {
@@ -33,7 +37,7 @@
                 }
             </div>
             <div class="blog-meta"><span><i class="fa fa-user"></i> Admin</span> <span><i class="fa fa-clock-o"></i> @blog.CreationDate.ToString("s")</span> </div>
-            
+
         </article>
     }
 

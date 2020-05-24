@@ -6,41 +6,41 @@
     var htmlText = Model.Blog.BodyHtml == null ?  string.Empty : Model.Blog.BodyHtml; 
 }
 
-<div class="col-md-9">
-    <div id="first">
-        <h3>Update Blog Details</h3>
-        <div class="racc">
-            <div class="toggle-content">
-                <form method="post" enctype="multipart/form-data">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label>Blog title</label>
-                        <input asp-for="Entity.Title" class="form-control" value="@Model.Blog.Title" />
-                        <span asp-validation-for="Entity.Title" class="text-danger"></span>
-                    </div>
-                    <input type="hidden" name="Entity.CreationDate" value="@Model.Blog.CreationDate" />
-                    <input type="hidden" name="Entity.Id" value="@Model.Blog.Id" />
-                    @*<div class="form-group">
-                        <label for="Blog.Body">Blog breif description</label>
-                        <textarea id="Blog_Body" name="Entity.Body" class="form-control" rows="7">
-                            @Model.Blog.Body
-                        </textarea>
-                        <span asp-validation-for="Entity.Body" class="text-danger"></span>
-                    </div>*@
-                    <div class="form-group">
-                        <label for="Blog.Body">Html body</label>
-                        <textarea id="summernote" name="Entity.BodyHtml" class="form-control">
+    <div class="col-md-9">
+        <div id="first">
+            <h3>Update Blog Details</h3>
+            <div class="racc">
+                <div class="toggle-content">
+                    <form method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label>Blog title</label>
+                            <input asp-for="Entity.Title" class="form-control" value="@Model.Blog.Title" />
+                            <span asp-validation-for="Entity.Title" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" name="Entity.CreationDate" value="@Model.Blog.CreationDate" />
+                        <input type="hidden" name="Entity.Id" value="@Model.Blog.Id" />
+                        @*<div class="form-group">
+                            <label for="Blog.Body">Blog breif description</label>
+                            <textarea id="Blog_Body" name="Entity.Body" class="form-control" rows="7">
+                                @Model.Blog.Body
+                            </textarea>
+                            <span asp-validation-for="Entity.Body" class="text-danger"></span>
+                        </div>*@
+                        <div class="form-group">
+                            <label for="Blog.Body">Html body</label>
+                            <textarea id="summernote" name="Entity.BodyHtml" class="form-control">
                            @Html.Raw(htmlText.Replace("\r\n", "<br />"))
                         </textarea>
-                    </div>
-                    @*<div class="form-group">
-                        <label class="control-label">Blog photo</label>
-                        <input type="file" name="PicturFile" class="form-control" />
-                        <span asp-validation-for="Entity.PhotoUrl" class="text-danger"></span>
-                        <div class="space10"></div>
-                        <img style="max-height:100px; max-width:500px" src="@Model.Blog.PhotoUrl" />
-                    </div>*@
-                    @*<div class="form-group">
+                        </div>
+                        @*<div class="form-group">
+                            <label class="control-label">Blog photo</label>
+                            <input type="file" name="PicturFile" class="form-control" />
+                            <span asp-validation-for="Entity.PhotoUrl" class="text-danger"></span>
+                            <div class="space10"></div>
+                            <img style="max-height:100px; max-width:500px" src="@Model.Blog.PhotoUrl" />
+                        </div>*@
+                        @*<div class="form-group">
                             <label asp-for="Entity.VideoUrls" class="control-label">Embed Video Urls</label>
                             <div id="dvVideoUrls">
                                 @if (Model.Blog.VideoUrls != null)
@@ -65,54 +65,54 @@
                             <input type="button" class="btn btn-primary" value="Add New" id="btnAddVideo" />
                             <span asp-validation-for="Entity.VideoUrls" class="text-danger"></span>
                         </div>*@
-                    <div class="form-group">
-                        <label>
-                            Attachment(s)
-                            (Attach multiple files.)
-                        </label>
+                        <div class="form-group">
+                            <label>
+                                Attachment(s)
+                                (Attach multiple files.)
+                            </label>
 
-                        <span class="btn btn-default btn-file">
-                            <input id="input-2" name="Attachments[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
-                        </span>
-                        <div class="row">
-                            <div class="file-preview-thumbnails">
-                                @if (Model.Blog.Attachments != null)
-                                {
-                                    for (var i = 0; i < Model.Blog.Attachments.Length; i++)
+                            <span class="btn btn-default btn-file">
+                                <input id="input-2" name="Attachments[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                            </span>
+                            <div class="row">
+                                <div class="file-preview-thumbnails">
+                                    @if (Model.Blog.Attachments != null)
                                     {
-                                        <div class="file-preview-frame attachment-dv" id="@Model.Blog.Attachments[i].ServerFileName" data-fileindex="1" title="@Model.Blog.Attachments[i].OriginalFileName" style="width:160px;height:160px;">
-                                            <div class="file-preview-other-frame">
-                                                <div class="file-preview-other">
-                                                    <span class="file-icon-4x"><i class="glyphicon glyphicon-file"></i></span>
+                                        for (var i = 0; i < Model.Blog.Attachments.Length; i++)
+                                        {
+                                            <div class="file-preview-frame attachment-dv" id="@Model.Blog.Attachments[i].ServerFileName" data-fileindex="1" title="@Model.Blog.Attachments[i].OriginalFileName" style="width:160px;height:160px;">
+                                                <div class="file-preview-other-frame">
+                                                    <div class="file-preview-other">
+                                                        <span class="file-icon-4x"><i class="glyphicon glyphicon-file"></i></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <input type="hidden" name="Entity.Attachments[@i].ServerFileName" value="@Model.Blog.Attachments[i].ServerFileName" />
-                                            <div class="file-preview-other-footer">
-                                                <div class="file-thumbnail-footer">
-                                                    <div class="file-footer-caption" title="@Model.Blog.Attachments[i].OriginalFileName">@Model.Blog.Attachments[i].OriginalFileName </div>
-                                                    <div style="text-align:center;">
-                                                        <button class="btn btn-danger delete-attachment" type="button" data-index="@i">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
+                                                <input type="hidden" name="Entity.Attachments[@i].ServerFileName" value="@Model.Blog.Attachments[i].ServerFileName" />
+                                                <div class="file-preview-other-footer">
+                                                    <div class="file-thumbnail-footer">
+                                                        <div class="file-footer-caption" title="@Model.Blog.Attachments[i].OriginalFileName">@Model.Blog.Attachments[i].OriginalFileName </div>
+                                                        <div style="text-align:center;">
+                                                            <button class="btn btn-danger delete-attachment" type="button" data-index="@i">
+                                                                <i class="fa fa-times"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
                                     }
-                                }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="space30"></div>
-                    <div class="form-group">
-                        <input type="submit" value="Update" class="btn btn-primary" />
-                    </div>
-                </form>
+                        <div class="space30"></div>
+                        <div class="form-group">
+                            <input type="submit" value="Update" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 @section Scripts{
     <script type="text/javascript">

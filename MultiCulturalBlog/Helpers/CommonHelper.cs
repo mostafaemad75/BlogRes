@@ -108,7 +108,7 @@ namespace MultiCulturalBlog.Helpers
 
         public List<ArchiveModel> GenerateBlogArchiveModel(IEnumerable<Blog> allBlogs)
         {
-            return allBlogs.GroupBy(x => x.CreationDate.Year).Select(x => new ArchiveModel
+            return allBlogs.OrderByDescending(x=>x.CreationDate).GroupBy(x => x.CreationDate.Year).Select(x => new ArchiveModel
             {
                 Year = x.Key.ToString(),
                 Count = x.Count(),
